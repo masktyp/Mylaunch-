@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Gift</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .hidden {
+            display: none;
+        }
+        .gift-box {
+            display: inline-block;
+            padding: 20px;
+            margin: 20px;
+            border: 2px solid black;
+            cursor: pointer;
+            font-size: 20px;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="nameInputDiv">
+        <h2>Enter Your Name:</h2>
+        <input type="text" id="userName" placeholder="Your Name">
+        <button onclick="submitName()">Submit</button>
+    </div>
+
+    <div id="giftSelectionDiv" class="hidden">
+        <h2>Choose Your Surprise Gift</h2>
+        <div class="gift-box" onclick="openGift()">🎁 Gift 1</div>
+        <div class="gift-box" onclick="openGift()">🎁 Gift 2</div>
+    </div>
+
+    <div id="resultDiv" class="hidden">
+        <h2 id="resultText"></h2>
+        <button onclick="restart()">Try Again</button>
+    </div>
+
+    <script>
+        function submitName() {
+            let name = document.getElementById("userName").value;
+            if (name.trim() === "") {
+                alert("Please enter your name!");
+                return;
+            }
+            document.getElementById("nameInputDiv").classList.add("hidden");
+            document.getElementById("giftSelectionDiv").classList.remove("hidden");
+        }
+
+        function openGift() {
+            document.getElementById("giftSelectionDiv").classList.add("hidden");
+            document.getElementById("resultDiv").classList.remove("hidden");
+
+            let randomNumber = Math.random();
+            if (randomNumber < 0.5) {
+                document.getElementById("resultText").innerText = "Congratulations! 🎉 You won ₹1000!";
+            } else {
+                document.getElementById("resultText").innerText = "Better luck next time! 🙁";
+            }
+        }
+
+        function restart() {
+            document.getElementById("userName").value = "";
+            document.getElementById("nameInputDiv").classList.remove("hidden");
+            document.getElementById("giftSelectionDiv").classList.add("hidden");
+            document.getElementById("resultDiv").classList.add("hidden");
+        }
+    </script>
+
+</body>
+</html>
